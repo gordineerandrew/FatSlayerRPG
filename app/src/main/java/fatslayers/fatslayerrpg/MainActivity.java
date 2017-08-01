@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         expBar = (ProgressBar) findViewById(R.id.progressBar);
         expBar.setMax(Exp);
 
+
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -134,12 +136,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-
+        editor.putInt("expBar", expBar.getProgress());
         editor.apply();
     }
     private void restoreData(){
         SharedPreferences sharedPref = getPreferences (MODE_PRIVATE);
         mSoundOn = sharedPref.getBoolean ("sound", true);
+        expBar.setProgress(sharedPref.getInt("expBar", 0));
     }
 
     @Override
@@ -156,9 +159,7 @@ public class MainActivity extends AppCompatActivity {
             int i = 0;
             while(i < levels.length) {
                 if(difficultyLevel.equals(levels[i])) {
-                    Log.d(TAG,"difficulty:: "+(QuestGame.DifficultyLevel.values()[i]).toString());
-                   questGame.setDifficultyLevel(QuestGame.DifficultyLevel.values()[i]);
-                    Log.d(TAG,"hi");
+                    questGame.setDifficultyLevel(QuestGame.DifficultyLevel.values()[i]);
                     i = levels.length; // to stop loop
                 }
                 i++;
