@@ -18,8 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_below="@+id/loot"
-        />
+        android:layout_above="@+id/craft2"
+        android:layout_alignLeft="@+id/btn_start"
+        android:layout_alignStart="@+id/btn_start"
+        android:layout_marginBottom="25dp" />
 
 
     <Button
