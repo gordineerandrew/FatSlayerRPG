@@ -1,9 +1,13 @@
 package fatslayers.fatslayerrpg;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.hardware.SensorManager;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -57,6 +61,35 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
+    private boolean mIsBound = false;
+    private MusicService mServ;
+    private ServiceConnection Scon =new ServiceConnection(){
+
+        public void onServiceConnected(ComponentName name, IBinder
+                binder) {
+            mServ = ((MusicService.ServiceBinder)binder).getService();
+        }
+
+        public void onServiceDisconnected(ComponentName name) {
+            mServ = null;
+        }
+    };
+
+    void doBindService(){
+        bindService(new Intent(this,MusicService.class),
+                Scon, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
+    }
+
+    void doUnbindService()
+    {
+        if(mIsBound)
+        {
+            unbindService(Scon);
+            mIsBound = false;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +111,11 @@ public class MainActivity extends AppCompatActivity {
         expBar = (ProgressBar) findViewById(R.id.progressBar);
         expBar.setMax(Exp);
 
+        doBindService();
 
+        Intent music = new Intent();
+        music.setClass(this,MusicService.class);
+        startService(music);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +176,21 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("expBar", expBar.getProgress());
         editor.apply();
     }
+
+//
+//    @Override
+//    protected void onPause(){
+//        super.onPause();
+//        mServ.pauseMusic();
+//    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mServ.stopMusic();
+        doUnbindService();
+    }
+
     private void restoreData(){
         SharedPreferences sharedPref = getPreferences (MODE_PRIVATE);
         mSoundOn = sharedPref.getBoolean ("sound", true);
