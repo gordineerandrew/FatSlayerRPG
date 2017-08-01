@@ -6,18 +6,18 @@
         android:title="Sound"
         android:defaultValue="true"
         android:summary="Turn the sound on or off" />
-    <!--<EditTextPreference-->
-        <!--android:key="victory_message"-->
-        <!--android:summary=""-->
-        <!--android:defaultValue="@string/result_human_wins"-->
-        <!--android:title="Victory message" />-->
-    <!--<ListPreference-->
-        <!--android:key="difficulty_level"-->
-        <!--android:title="Difficulty level"-->
-        <!--android:summary=""-->
-        <!--android:defaultValue="@string/difficulty_expert"-->
-        <!--android:entries="@array/difficulty_levels"-->
-        <!--android:entryValues="@array/difficulty_levels" />-->
+    <EditTextPreference
+        android:key="user_id"
+        android:summary=""
+        android:defaultValue="@string/userid"
+        android:title="Player name" />
+    <ListPreference
+        android:key="difficulty_level"
+        android:title="Difficulty level"
+        android:summary=""
+        android:defaultValue="@string/difficulty_expert"
+        android:entries="@array/difficulty_levels"
+        android:entryValues="@array/difficulty_levels" />
     <!--<CheckBoxPreference-->
         <!--android:key="result_image"-->
         <!--android:title="Result Image"-->

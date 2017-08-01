@@ -61,6 +61,21 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_harder">Harder</string>
+    <string name="difficulty_expert">Expert</string>
+    <string-array name="difficulty_levels">
+        <item>@string/difficulty_easy</item>
+        <item>@string/difficulty_harder</item>
+        <item>@string/difficulty_expert</item>
+    </string-array>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="difficulty_choose">Choose a Difficulty Level</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
 
     <string-array name="multi_select_list_preference_default_value" />
 
@@ -74,5 +89,7 @@
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
 
+
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="userid">Player</string>
 </resources>

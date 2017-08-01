@@ -14,10 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class Quest extends Fragment implements StepListener, SensorEventListener {
+
+    ProgressBar expBar;
+
+
+
 
     boolean running = false;
     View myView;
@@ -28,7 +34,7 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
     private Sensor accel;
     private static final String TEXT_NUM_STEPS = "Number of Steps: ";
     private int numSteps;
-    TextView tv_steps;
+    private TextView tv_steps;
 
     int initialValue;
 
@@ -126,6 +132,10 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
 //error in this Tvsteps
         tv_steps.setText(TEXT_NUM_STEPS + numSteps);
 
+    }
+
+    public int getProgress(){
+        return numSteps;
     }
 }
 
