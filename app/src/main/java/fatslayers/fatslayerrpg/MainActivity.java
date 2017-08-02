@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Quest quest;
     private final int Exp = 5;
     private int numSteps;
+    private Intent music = new Intent();
 
 
     public boolean mSoundOn;
@@ -115,9 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
         doBindService();
 
-        Intent music = new Intent();
+
         music.setClass(this,MusicService.class);
         startService(music);
+
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -186,9 +188,15 @@ public class MainActivity extends AppCompatActivity {
 
         }
         editor.putInt("expBar", expBar.getProgress());
-        mServ.stopMusic();
+        stopService(music);
         doUnbindService();
         editor.apply();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        startService(music);
     }
 
 //
