@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         editor.putInt("expBar", expBar.getProgress());
+        mServ.stopMusic();
         doUnbindService();
         editor.apply();
     }
