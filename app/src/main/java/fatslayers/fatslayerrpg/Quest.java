@@ -3,6 +3,7 @@ package fatslayers.fatslayerrpg;
 /**
  * Created by drako on 7/30/2017.
  */
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -10,6 +11,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 public class Quest extends Fragment implements StepListener, SensorEventListener {
 
@@ -34,6 +39,7 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
     private Sensor accel;
     private static final String TEXT_NUM_STEPS = "Number of Steps: ";
     private int numSteps;
+    private int questSteps;
     private TextView tv_steps;
 
     int initialValue;
@@ -49,6 +55,8 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
         simpleStepDetector = new StepDetector();
         simpleStepDetector.registerListener(this);
 
+
+
 //Tvsteps is initialised here
         Button BtnStart = rl.findViewById(R.id.btn_start);
         Button BtnStop = rl.findViewById(R.id.btn_stop);
@@ -58,7 +66,7 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
             @Override
             public void onClick(View arg0) {
 
-                numSteps = 0;
+                questSteps = 0;
                 sensorManager.registerListener(Quest.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
 
             }
@@ -128,14 +136,19 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
     @Override
     public void step(long timeNs) {
         numSteps++;
+        questSteps++;
 
 //error in this Tvsteps
-        tv_steps.setText(TEXT_NUM_STEPS + numSteps);
+        tv_steps.setText(TEXT_NUM_STEPS + questSteps);
 
     }
 
     public int getProgress(){
         return numSteps;
+    }
+
+    public void setProgress(int progress){
+        numSteps = progress;
     }
 }
 

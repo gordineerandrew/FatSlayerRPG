@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import static android.content.ContentValues.TAG;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean inQuest = false;
     private Quest quest;
     private final int Exp = 5;
+    private int numSteps;
 
 
     public boolean mSoundOn;
@@ -133,6 +135,10 @@ public class MainActivity extends AppCompatActivity {
                 //update here
                 if(inQuest){
 
+                    if(quest.getProgress() == 0){
+                        quest.setProgress(numSteps);
+                    }
+
                     expBar.setProgress(quest.getProgress()%(Exp+1));
                     //TODO: LEVEL UP
                 }
@@ -141,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         restoreData();
+
+//        quest.setProgress(numSteps);
 
     }
 
@@ -173,7 +181,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
+        if (inQuest){
+            editor.putInt("numSteps", quest.getProgress());
+
+        }
         editor.putInt("expBar", expBar.getProgress());
+        doUnbindService();
         editor.apply();
     }
 
@@ -184,17 +197,20 @@ public class MainActivity extends AppCompatActivity {
 //        mServ.pauseMusic();
 //    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mServ.stopMusic();
-        doUnbindService();
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mServ.stopMusic();
+//        doUnbindService();
+//    }
 
     private void restoreData(){
         SharedPreferences sharedPref = getPreferences (MODE_PRIVATE);
         mSoundOn = sharedPref.getBoolean ("sound", true);
         expBar.setProgress(sharedPref.getInt("expBar", 0));
+        Log.d(TAG, String.valueOf(sharedPref.getInt("numSteps", 0)));
+        numSteps = sharedPref.getInt("numSteps", 0);
+
     }
 
     @Override
