@@ -48,16 +48,33 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
     <TextView
-        android:id="@+id/userIdLvl"
+        android:id="@+id/userId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70sp"
         android:layout_gravity="left|top"
         android:textSize="30sp"
         android:paddingLeft="10sp"
-        android:text="UserID:123, Lvl 2" />
+        android:text="UserID:123" />
+    <TextView
+        android:id="@+id/userLvlLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70sp"
+        android:layout_gravity="right|top"
+        android:textSize="25sp"
+        android:paddingRight="40sp"
+        android:text="Lvl" />
+    <TextView
+        android:id="@+id/userLvl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70sp"
+        android:layout_gravity="right|top"
+        android:textSize="25sp"
+        android:paddingRight="7sp"
+        android:text="50" />
 
 
     <ProgressBar

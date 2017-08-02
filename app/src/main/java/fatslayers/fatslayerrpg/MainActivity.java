@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private int numSteps;
     private Intent music = new Intent();
 
+    private TextView levelText;
+    private TextView nameText;
+
+    private int level = 1;
 
     public boolean mSoundOn;
 
@@ -98,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        nameText = (TextView) findViewById(R.id.userId);
+        levelText = (TextView) findViewById(R.id.userLvl);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -143,12 +151,20 @@ public class MainActivity extends AppCompatActivity {
 
                     expBar.setProgress(quest.getProgress()%(Exp+1));
                     //TODO: LEVEL UP
+                    if(quest.getProgress()>0 && quest.getProgress()%(Exp)==0) {
+                        expBar.setProgress(1);
+                        numSteps = quest.getProgress();
+                        level = numSteps/Exp;
+                        levelText.setText(String.valueOf(level));
+                    }
                 }
                 handler.postDelayed(this,500);
             }
         });
 
         restoreData();
+        levelText.setText(String.valueOf(level));
+
 
 //        quest.setProgress(numSteps);
 
@@ -188,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         editor.putInt("expBar", expBar.getProgress());
+        editor.putInt("level", level);
         stopService(music);
         doUnbindService();
         editor.apply();
@@ -219,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
         expBar.setProgress(sharedPref.getInt("expBar", 0));
         Log.d(TAG, String.valueOf(sharedPref.getInt("numSteps", 0)));
         numSteps = sharedPref.getInt("numSteps", 0);
+        level = sharedPref.getInt("level", 1);
 
     }
 
