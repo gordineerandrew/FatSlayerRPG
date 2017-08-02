@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private boolean mIsBound = false;
+    private String username;
     private MusicService mServ;
     private ServiceConnection Scon =new ServiceConnection(){
 
@@ -164,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
         restoreData();
         levelText.setText(String.valueOf(level));
+        nameText.setText(username);
 
 
 //        quest.setProgress(numSteps);
@@ -205,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         }
         editor.putInt("expBar", expBar.getProgress());
         editor.putInt("level", level);
+        editor.putString("username", username);
         stopService(music);
         doUnbindService();
         editor.apply();
@@ -234,15 +237,18 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getPreferences (MODE_PRIVATE);
         mSoundOn = sharedPref.getBoolean ("sound", true);
         expBar.setProgress(sharedPref.getInt("expBar", 0));
-        Log.d(TAG, String.valueOf(sharedPref.getInt("numSteps", 0)));
         numSteps = sharedPref.getInt("numSteps", 0);
         level = sharedPref.getInt("level", 1);
+        username = sharedPref.getString("username", "Player");
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        username=data.getStringExtra("name");
+        nameText.setText(username);
         if (requestCode == SETTINGS_REQUEST) {
+
             SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
             // Apply potentially new settings
             mSoundOn = sharedPref.getBoolean("sound", true);
