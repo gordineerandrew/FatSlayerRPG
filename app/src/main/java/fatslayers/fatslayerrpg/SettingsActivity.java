@@ -24,6 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
+        name = getIntent().getStringExtra("name");
     }
 
     @Override
@@ -49,6 +50,8 @@ public class SettingsActivity extends AppCompatActivity {
             updateUsernameSummary();
             setDifficultyListener();
             setUserID();
+
+
 //            setVictoryListener();
             // handle victory message summary and listener
         }

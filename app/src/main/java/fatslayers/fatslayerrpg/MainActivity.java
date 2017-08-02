@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
+            intent.putExtra("name",username);
             startActivityForResult(intent, SETTINGS_REQUEST);
             return true;
         }
@@ -252,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
             // Apply potentially new settings
             mSoundOn = sharedPref.getBoolean("sound", true);
+            Log.d(TAG,"sound is on: "+sharedPref.getBoolean("sound", true));
             //mHumanWinString = sharedPref.getString ("victory_message", "You Won!");
             String[] levels = getResources().getStringArray(R.array.difficulty_levels);
             // set difficulty, or use hardest if not present,
