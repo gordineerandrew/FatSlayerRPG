@@ -137,7 +137,6 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
     public void step(long timeNs) {
         numSteps++;
         questSteps++;
-
 //error in this Tvsteps
         tv_steps.setText(TEXT_NUM_STEPS + questSteps);
 

@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Home extends Fragment {
 
@@ -16,7 +19,14 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.home_screen, container, false);
+
+
         return rootView;
     }
+
+
+
+
+
 
 }

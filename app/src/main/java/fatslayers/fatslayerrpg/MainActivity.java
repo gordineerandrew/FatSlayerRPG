@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.IBinder;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import static android.content.ContentValues.TAG;
@@ -39,13 +41,15 @@ public class MainActivity extends AppCompatActivity {
     private QuestGame questGame = new QuestGame();
     private ProgressBar expBar = null;
     public boolean inQuest = false;
+    public boolean inHome = false;
     private Quest quest;
-    private final int Exp = 5;
-    private int numSteps;
+    private final int Exp = 50;
+    private int numSteps = 0;
     private Intent music = new Intent();
 
     private TextView levelText;
     private TextView nameText;
+    private TextView fkme;
 
     private int level = 1;
 
@@ -103,12 +107,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         nameText = (TextView) findViewById(R.id.userId);
         levelText = (TextView) findViewById(R.id.userLvl);
+        fkme = (TextView) findViewById(R.id.count_fat_slain);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(Color.BLACK);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -158,7 +164,12 @@ public class MainActivity extends AppCompatActivity {
                         level = numSteps/Exp;
                         levelText.setText(String.valueOf(level));
                     }
+                    numSteps = quest.getProgress();
+
                 }
+
+                fkme.setText(String.valueOf(numSteps));
+
                 handler.postDelayed(this,500);
             }
         });
@@ -166,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
         restoreData();
         levelText.setText(String.valueOf(level));
         nameText.setText(username);
+        fkme.setText(String.valueOf(numSteps));
 
 
 //        quest.setProgress(numSteps);
@@ -337,13 +349,20 @@ public class MainActivity extends AppCompatActivity {
                             return home;
                         case 1:
                             Craft craft = new Craft();
+//                            inHome = false;
+//                            Log.d(TAG,"Boolean of Home in Craft:" + inHome);
                             return craft;
                         case 2:
                             quest = new Quest();
+//                            inHome = false;
+//                            Log.d(TAG,"Boolean of Home in Quest:" + inHome);
                             inQuest = true;
+
                             return quest;
                         case 3:
                             Stats stats = new Stats();
+//                            inHome = false;
+//                            Log.d(TAG,"Boolean of Home in Stats:" + inHome);
                             return stats;
                         default:
                             return null;
@@ -370,6 +389,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     return null;
                 }
+
             }
 
         }
