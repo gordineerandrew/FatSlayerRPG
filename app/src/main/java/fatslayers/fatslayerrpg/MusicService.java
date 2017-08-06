@@ -5,7 +5,9 @@ package fatslayers.fatslayerrpg;
  */
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnErrorListener;
 import android.os.Binder;
@@ -17,6 +19,7 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
     private final IBinder mBinder = new ServiceBinder();
     MediaPlayer mPlayer;
     private int length = 0;
+    int maxVolume = 50;
 
     public MusicService() {
     }
@@ -42,10 +45,15 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
 
         mPlayer = MediaPlayer.create(this, R.raw.bgm);
         mPlayer.setOnErrorListener(this);
+        AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        int currVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
+
+        float log1=(float)(Math.log(maxVolume-currVolume)/Math.log(maxVolume));
+
 
         if (mPlayer != null) {
             mPlayer.setLooping(true);
-            mPlayer.setVolume(100, 100);
+            mPlayer.setVolume(1-log1, 1-log1);
         }
 
 
