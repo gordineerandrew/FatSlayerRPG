@@ -70,6 +70,22 @@
         <item>@string/difficulty_expert</item>
     </string-array>
 
+    <string-array name="helm_list">
+        <item>None</item>
+    </string-array>
+
+    <string-array name="armor_list">
+        <item>None</item>
+    </string-array>
+
+    <string-array name="leggings_list">
+        <item>None</item>
+    </string-array>
+
+    <string-array name="boots_list">
+        <item>None</item>
+    </string-array>
+
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="difficulty_choose">Choose a Difficulty Level</string>

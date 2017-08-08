@@ -3,6 +3,7 @@ package fatslayers.fatslayerrpg;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,7 @@ import static android.R.id.message;
 public class SettingsActivity extends AppCompatActivity {
 
     private static String name;
-
+    private static CheckBoxPreference soundPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
