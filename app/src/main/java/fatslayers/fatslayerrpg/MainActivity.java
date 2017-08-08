@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity  {
     public boolean inStats = false;
     public boolean inHome = false;
     private Quest quest;
-    private final int Exp = 50;
+    private Stats stats;
+    private int Exp = 50;
     private int numSteps = 0;
     private Intent music = new Intent();
 
@@ -67,6 +68,13 @@ public class MainActivity extends AppCompatActivity  {
     boolean armor_bool;
     boolean leggings_bool;
     boolean boots_bool;
+
+    private int helm_int;
+    private int armor_int;
+    private int leggings_int;
+    private int boots_int;
+
+    private int boost;
 
     private static final int SETTINGS_REQUEST = 0;
     /**
@@ -172,7 +180,7 @@ public class MainActivity extends AppCompatActivity  {
         tabLayout.setupWithViewPager(mViewPager);
 
         expBar = (ProgressBar) findViewById(R.id.progressBar);
-        expBar.setMax(Exp);
+
 
 
         doBindService();
@@ -183,6 +191,9 @@ public class MainActivity extends AppCompatActivity  {
             startService(music);
         }
 
+        restoreData();
+
+        expBar.setMax(Exp);
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -194,31 +205,68 @@ public class MainActivity extends AppCompatActivity  {
 //            }
 //        });
 
+
+
         final Handler handler = new Handler();
         handler.post(new Runnable() {
+            boolean restored = false;
+            ArrayList<String> temp;
             @Override
             public void run() {
+
+
+                expBar.setMax(Exp);
+                if(inQuest&& inStats){
+                    temp = quest.getItemsList();
+                    if(temp.contains("Boots")){
+                        boots_bool = true;
+                    }
+                    if(temp.contains("Helmet")){
+                        helm_bool = true;
+                    }
+                    if(temp.contains("Armor")){
+                        armor_bool = true;
+                    }
+                    if(temp.contains("Leggings")){
+                        leggings_bool = true;
+                    }
+                    stats.addItems(helm_bool,armor_bool,leggings_bool,boots_bool);
+
+                }
                 //update here
                 if(inQuest){
+
 
                     if(quest.getProgress() == 0){
                         quest.setProgress(numSteps);
                     }
 
-                    expBar.setProgress(quest.getProgress()%(Exp+1));
+                    expBar.setProgress((quest.getProgress()%(Exp)));
+
                     //TODO: LEVEL UP
                     if(quest.getProgress()>0 && quest.getProgress()%(Exp)==0) {
-                        expBar.setProgress(1);
+                        expBar.setProgress(0);
                     }
                     numSteps = quest.getProgress();
-                    level = numSteps/Exp;
+                    level = numSteps/(Exp);
                     levelText.setText(String.valueOf(level));
                     numSteps = quest.getProgress();
 
+
+                }
+
+                if(inStats && !restored){
+                    stats.addItems(helm_bool, armor_bool, leggings_bool, boots_bool);
+                    stats.restoreState(helm_int, armor_int, leggings_int, boots_int);
+                    restored = true;
                 }
 
                 if(inStats){
-
+                    boost = stats.getTotalBoost();
+                    helm_int = stats.getHelm();
+                    armor_int = stats.getArmor();
+                    leggings_int = stats.getLeggings();
+                    boots_int = stats.getBoots();
                 }
 
                 fkme.setText(String.valueOf(numSteps));
@@ -227,7 +275,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        restoreData();
         levelText.setText(String.valueOf(level));
         nameText.setText(username);
         fkme.setText(String.valueOf(numSteps));
@@ -287,6 +334,13 @@ public class MainActivity extends AppCompatActivity  {
         editor.putBoolean("leggings", leggings_bool);
         editor.putBoolean("boots", boots_bool);
 
+        editor.putInt("helm_int", helm_int);
+        editor.putInt("armor_int", armor_int);
+        editor.putInt("leggings_int", leggings_int);
+        editor.putInt("boots_int", boots_int);
+
+        editor.putInt("boost", boost);
+
         stopService(music);
         doUnbindService();
         editor.apply();
@@ -326,6 +380,14 @@ public class MainActivity extends AppCompatActivity  {
         armor_bool = sharedPref.getBoolean("armor", false);
         leggings_bool = sharedPref.getBoolean("leggings", false);
         boots_bool = sharedPref.getBoolean("boots", false);
+
+        helm_int = sharedPref.getInt("helm_int", 0);
+        armor_int = sharedPref.getInt("armor_int", 0);
+        leggings_int = sharedPref.getInt("leggings_int", 0);
+        boots_int = sharedPref.getInt("boots_int", 0);
+
+        boost = sharedPref.getInt("boost", 1);
+
 
     }
 
@@ -434,7 +496,7 @@ public class MainActivity extends AppCompatActivity  {
 
                             return quest;
                         case 2:
-                            Stats stats = new Stats();
+                            stats = new Stats();
                             inStats = true;
                             return stats;
                         default:

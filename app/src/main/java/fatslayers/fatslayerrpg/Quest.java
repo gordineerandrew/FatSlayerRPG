@@ -15,12 +15,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
@@ -202,7 +206,22 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
         tv_steps.setText(TEXT_NUM_STEPS + questSteps);
 
     }
-
+    public ArrayList<String> getItemsList(){
+        ArrayList<String> tempList = new ArrayList<>();
+        if(helm_bool&& questSteps > 91){
+            tempList.add("Helmet");
+        }
+        if(armor_bool&& questSteps > 81){
+            tempList.add("Armor");
+        }
+        if(leggings_bool&& questSteps > 71){
+            tempList.add("Leggings");
+        }
+        if(boots_bool&& questSteps > 11){
+            tempList.add("Boots");
+        }
+        return tempList;
+    }
     public int getProgress(){
         return numSteps;
     }
