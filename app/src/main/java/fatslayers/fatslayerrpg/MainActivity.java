@@ -27,15 +27,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private static final String TAG = "pls no error";
 
@@ -51,10 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView levelText;
     private TextView nameText;
     private TextView fkme;
-    Spinner spinner_helm;
-    Spinner spinner_armor;
-    Spinner spinner_leggings;
-    Spinner spinner_boots;
 
     private int level = 1;
 
@@ -116,12 +118,38 @@ public class MainActivity extends AppCompatActivity {
         nameText = (TextView) findViewById(R.id.userId);
         levelText = (TextView) findViewById(R.id.userLvl);
         fkme = (TextView) findViewById(R.id.count_fat_slain);
-        spinner_helm = (Spinner) findViewById(R.id.equip_helm);
-        spinner_armor = (Spinner) findViewById(R.id.equip_armor);
-        spinner_leggings = (Spinner) findViewById(R.id.equip_leggings);
-        spinner_boots = (Spinner) findViewById(R.id.equip_boots);
-
-        
+//        spinner_helm = (Spinner) findViewById(R.id.equip_helm);
+//        spinner_armor = (Spinner) findViewById(R.id.equip_armor);
+//        spinner_leggings = (Spinner) findViewById(R.id.equip_leggings);
+//        spinner_boots = (Spinner) findViewById(R.id.equip_boots);
+//
+//        List<String> helm_list = new ArrayList<String>();
+//        helm_list.add("<None>");
+//        List<String> armor_list = new ArrayList<String>();
+//        armor_list.add("<None>");
+//        List<String> leggings_list = new ArrayList<String>();
+//        leggings_list.add("<None>");
+//        List<String> boots_list = new ArrayList<String>();
+//        boots_list.add("<None>");
+//
+//
+//        // Creating adapter for spinner
+//        ArrayAdapter<String> helm_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, helm_list);
+//        ArrayAdapter<String> armor_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, armor_list);
+//        ArrayAdapter<String> leggings_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leggings_list);
+//        ArrayAdapter<String> boots_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, boots_list);
+//
+//        // Drop down layout style - list view with radio button
+//        helm_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        armor_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        leggings_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        boots_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        // attaching data adapter to spinner
+//        spinner_helm.setAdapter(helm_Adapter);
+//        spinner_armor.setAdapter(armor_Adapter);
+//        spinner_leggings.setAdapter(leggings_Adapter);
+//        spinner_boots.setAdapter(boots_Adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -195,6 +223,8 @@ public class MainActivity extends AppCompatActivity {
 //        quest.setProgress(numSteps);
 
     }
+
+
 
 
     @Override
