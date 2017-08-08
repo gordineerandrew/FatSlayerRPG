@@ -18,6 +18,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private static String name;
     private static CheckBoxPreference soundPref;
+    private static boolean ItsLookingGood;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void onBackPressed(){
         Intent intent = new Intent();
         intent.putExtra("name",name);
+        intent.putExtra("soundState",ItsLookingGood);
         setResult(RESULT_OK, intent);
         super.onBackPressed();
     }
@@ -51,11 +53,28 @@ public class SettingsActivity extends AppCompatActivity {
             updateUsernameSummary();
             setDifficultyListener();
             setUserID();
+            setSoundListener();
 
 
 //            setVictoryListener();
             // handle victory message summary and listener
         }
+
+        private void setSoundListener(){
+            soundPref = (CheckBoxPreference) findPreference("sound");
+            ItsLookingGood = soundPref.isChecked();
+            soundPref.setOnPreferenceChangeListener(
+                    new Preference.OnPreferenceChangeListener(){
+                        @Override
+                        public boolean onPreferenceChange(Preference preference, Object newValue){
+                            ItsLookingGood = Boolean.valueOf(newValue.toString());
+
+                            return true;
+                        }
+                    }
+            );
+        }
+
         private void setDifficultyListener() {
             final Preference difficultyLevelPref = findPreference("difficulty_level");
             difficultyLevelPref.setOnPreferenceChangeListener(

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity  {
     private QuestGame questGame = new QuestGame();
     private ProgressBar expBar = null;
     public boolean inQuest = false;
+    public boolean inStats = false;
     public boolean inHome = false;
     private Quest quest;
     private final int Exp = 50;
@@ -61,6 +62,11 @@ public class MainActivity extends AppCompatActivity  {
     private int level = 1;
 
     public boolean mSoundOn;
+
+    boolean helm_bool;
+    boolean armor_bool;
+    boolean leggings_bool;
+    boolean boots_bool;
 
     private static final int SETTINGS_REQUEST = 0;
     /**
@@ -173,7 +179,10 @@ public class MainActivity extends AppCompatActivity  {
 
 
         music.setClass(this,MusicService.class);
-        startService(music);
+        if(mSoundOn){
+            startService(music);
+        }
+
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -205,6 +214,10 @@ public class MainActivity extends AppCompatActivity  {
                     level = numSteps/Exp;
                     levelText.setText(String.valueOf(level));
                     numSteps = quest.getProgress();
+
+                }
+
+                if(inStats){
 
                 }
 
@@ -267,6 +280,13 @@ public class MainActivity extends AppCompatActivity  {
         editor.putInt("expBar", expBar.getProgress());
         editor.putInt("level", level);
         editor.putString("username", username);
+        editor.putBoolean("sound", mSoundOn);
+
+        editor.putBoolean("helm", helm_bool);
+        editor.putBoolean("armor", armor_bool);
+        editor.putBoolean("leggings", leggings_bool);
+        editor.putBoolean("boots", boots_bool);
+
         stopService(music);
         doUnbindService();
         editor.apply();
@@ -275,7 +295,9 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onResume(){
         super.onResume();
-        startService(music);
+        if(mSoundOn){
+            startService(music);
+        }
     }
 
 //
@@ -300,18 +322,25 @@ public class MainActivity extends AppCompatActivity  {
         level = sharedPref.getInt("level", 1);
         username = sharedPref.getString("username", "Player");
 
+        helm_bool = sharedPref.getBoolean("helm", false);
+        armor_bool = sharedPref.getBoolean("armor", false);
+        leggings_bool = sharedPref.getBoolean("leggings", false);
+        boots_bool = sharedPref.getBoolean("boots", false);
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         username=data.getStringExtra("name");
+        mSoundOn=data.getBooleanExtra("soundState", true);
+        Log.d(TAG,"sound is on: " + mSoundOn);
         nameText.setText(username);
         if (requestCode == SETTINGS_REQUEST) {
 
             SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
             // Apply potentially new settings
-            mSoundOn = sharedPref.getBoolean("sound", true);
-            Log.d(TAG,"sound is on: "+sharedPref.getBoolean("sound", true));
+
+
             //mHumanWinString = sharedPref.getString ("victory_message", "You Won!");
             String[] levels = getResources().getStringArray(R.array.difficulty_levels);
             // set difficulty, or use hardest if not present,
@@ -392,6 +421,7 @@ public class MainActivity extends AppCompatActivity  {
                     switch (position) {
                         case 0:
                             Home home = new Home();
+                            inHome = true;
                             return home;
 //                        case 1:
 //                            Craft craft = new Craft();
@@ -400,15 +430,12 @@ public class MainActivity extends AppCompatActivity  {
 //                            return craft;
                         case 1:
                             quest = new Quest();
-//                            inHome = false;
-//                            Log.d(TAG,"Boolean of Home in Quest:" + inHome);
                             inQuest = true;
 
                             return quest;
                         case 2:
                             Stats stats = new Stats();
-//                            inHome = false;
-//                            Log.d(TAG,"Boolean of Home in Stats:" + inHome);
+                            inStats = true;
                             return stats;
                         default:
                             return null;

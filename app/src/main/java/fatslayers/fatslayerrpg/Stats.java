@@ -28,7 +28,23 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
     Spinner spinner_leggings;
     Spinner spinner_boots;
 
-    private List<String> helms;
+
+    List<String> helm_list;
+    List<String> armor_list;
+    List<String> leggings_list;
+    List<String> boots_list;
+
+    boolean helm_bool;
+    boolean armor_bool;
+    boolean leggings_bool;
+    boolean boots_bool;
+
+
+    private int helm_int;
+    private int armor_int;
+    private int leggings_int;
+    private int boots_int;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,10 +68,10 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
         spinner_leggings.setOnItemSelectedListener(this);
         spinner_boots.setOnItemSelectedListener(this);
 
-        List<String> helm_list = new ArrayList<String>();
-        List<String> armor_list = new ArrayList<String>();
-        List<String> leggings_list = new ArrayList<String>();
-        List<String> boots_list = new ArrayList<String>();
+        helm_list = new ArrayList<String>();
+        armor_list = new ArrayList<String>();
+        leggings_list = new ArrayList<String>();
+        boots_list = new ArrayList<String>();
 
         //Creating the ArrayAdapter instance having the country list
         ArrayAdapter helm_Adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, helm_list);
@@ -68,6 +84,7 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
         leggings_list.add("<None>");
         boots_list.add("<None>");
 
+
         helm_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         armor_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         leggings_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -79,17 +96,11 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
         spinner_leggings.setAdapter(leggings_Adapter);
         spinner_boots.setAdapter(boots_Adapter);
 
-        helm_list.add("Swag");
-
-
+        if(helm_bool && !helm_list.contains("Santa Hat")){
+            addHelm();
+        }
 
     }
-
-
-
-
-
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -97,10 +108,19 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
         String item = parent.getItemAtPosition(position).toString();
 
         // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+        if(!item.equals("<None>")){
+            Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+
+        }
     }
+
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
 
+    public void addHelm(){
+        helm_list.add("Santa Hat");
+    }
+
 }
+
