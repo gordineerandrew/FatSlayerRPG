@@ -14,40 +14,42 @@
         <!--android:text="Stats"/>-->
 
     <Spinner
-        android:id="@+id/item1"
+        android:id="@+id/equip_helm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item3"
-        android:layout_toRightOf="@+id/item4"
-        android:layout_toEndOf="@+id/item4"
-        android:layout_alignRight="@+id/equipment"/>
+        android:layout_below="@+id/equipment"
+        android:backgroundTint="@color/black"
+        android:pointerIcon="text"
+
+        />
 
     <Spinner
-        android:id="@+id/item4"
+        android:id="@+id/equip_armor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item3"
-        android:layout_alignLeft="@+id/item3"/>
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/equipment"
+        android:backgroundTint="@color/black"
+        />
 
     <Spinner
-        android:id="@+id/item3"
+        android:id="@+id/equip_leggings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36sp"
-        android:layout_below="@id/equipment"
-        android:layout_alignLeft="@+id/equipment"/>
+        android:layout_below="@+id/stats"
+        android:backgroundTint="@color/black"/>
 
     <Spinner
-        android:id="@+id/item2"
+        android:id="@+id/equip_boots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/item1"
-        android:layout_toRightOf="@+id/item3"
-        android:layout_alignRight="@+id/equipment"/>
+        android:layout_below="@+id/stats"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/black"/>
 
     <TextView
         android:id="@+id/equipment"
-        android:layout_width="100sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80sp"
         android:text="Equipment"
@@ -56,7 +58,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="20sp"/>
+        android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/stats"
@@ -64,9 +66,9 @@
         android:layout_height="wrap_content"
         android:text="Stats"
         android:textAlignment="center"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="250sp"
+        android:layout_below="@+id/equipment"
+        android:paddingTop="70sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="25sp"/>
