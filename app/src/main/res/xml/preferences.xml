@@ -10,7 +10,8 @@
         android:key="user_id"
         android:summary=""
         android:defaultValue="@string/userid"
-        android:title="Player name" />
+        android:title="Player name"
+        android:inputType="textCapSentences"/>
     <ListPreference
         android:key="difficulty_level"
         android:title="Difficulty level"

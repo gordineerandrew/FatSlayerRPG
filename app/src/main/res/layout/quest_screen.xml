@@ -18,76 +18,96 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_above="@+id/craft2"
-        android:layout_alignLeft="@+id/btn_start"
-        android:layout_alignStart="@+id/btn_start"
-        android:layout_marginBottom="25dp" />
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_below="@+id/btn_start"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="7sp"
+        android:layout_marginStart="7sp" />
 
 
     <Button
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Quest"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/craft4"
-        android:layout_toLeftOf="@+id/craft4"
-        android:layout_toStartOf="@+id/craft4" />
+        android:text="Start"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/Boots"
+        android:layout_toLeftOf="@+id/Boots"
+        android:layout_toStartOf="@+id/Boots"/>
 
     <Button
         android:id="@+id/btn_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop Quest "
+        android:text="Stop"
         android:layout_alignBaseline="@+id/btn_start"
         android:layout_alignBottom="@+id/btn_start"
-        android:layout_toRightOf="@+id/craft4"
-        android:layout_toEndOf="@+id/craft4" />
+        android:layout_toRightOf="@+id/Boots"
+        android:layout_toEndOf="@+id/Boots" />
 
     <CheckBox
-        android:id="@+id/craft1"
+        android:id="@+id/Helmet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="Craft1"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="90sp"
+        android:text="Helmet"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
     <CheckBox
-        android:id="@+id/craft2"
+        android:id="@+id/Armor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="Craft2"
-        android:layout_alignTop="@+id/craft1"
-        android:layout_alignLeft="@+id/craft1"
-        android:layout_alignStart="@+id/craft1" />
+        android:layout_marginTop="35sp"
+        android:text="Armor"
+        android:layout_alignTop="@+id/Helmet"
+        android:layout_alignLeft="@+id/Helmet"
+        android:layout_alignStart="@+id/Helmet"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
     <CheckBox
-        android:id="@+id/craft3"
+        android:id="@+id/Leggings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="Craft3"
-        android:layout_alignTop="@+id/craft2"
-        android:layout_alignLeft="@+id/craft2"
-        android:layout_alignStart="@+id/craft2" />
+        android:layout_marginTop="35sp"
+        android:text="Leggings"
+        android:layout_alignTop="@+id/Armor"
+        android:layout_alignLeft="@+id/Armor"
+        android:layout_alignStart="@+id/Armor"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
     <CheckBox
-        android:id="@+id/craft4"
+        android:id="@+id/Boots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="Craft4"
-        android:layout_alignTop="@+id/craft3"
-        android:layout_alignLeft="@+id/craft3"
-        android:layout_alignStart="@+id/craft3" />
+        android:layout_marginTop="35sp"
+        android:text="Boots"
+        android:layout_alignTop="@+id/Leggings"
+        android:layout_alignLeft="@+id/Leggings"
+        android:layout_alignStart="@+id/Leggings"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/loot"
-        android:layout_width="120sp"
+        android:layout_width="wrap_content"
         android:layout_height="90sp"
-        android:layout_below="@id/craft4"
+        android:layout_below="@id/Boots"
         android:layout_centerInParent="true"
         android:layout_marginTop="70sp"
         android:textAlignment="center"
-        android:text="Gathered Loot" />
+        android:gravity="center_horizontal"
+        android:text="Gathered Loot"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25sp" />
 
 
 </RelativeLayout>

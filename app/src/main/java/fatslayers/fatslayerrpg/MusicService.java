@@ -45,11 +45,7 @@ public class MusicService extends Service  implements MediaPlayer.OnErrorListene
 
         mPlayer = MediaPlayer.create(this, R.raw.bgm);
         mPlayer.setOnErrorListener(this);
-        AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        int currVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
-        if (currVolume <= 0){
-            currVolume = 1;
-        }
+        int currVolume = 20;
 
         float log1=(float)(Math.log(maxVolume-currVolume)/Math.log(maxVolume));
 

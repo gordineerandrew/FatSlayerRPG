@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         nameText = (TextView) findViewById(R.id.userId);
         levelText = (TextView) findViewById(R.id.userLvl);
         fkme = (TextView) findViewById(R.id.count_fat_slain);
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
         expBar = (ProgressBar) findViewById(R.id.progressBar);
         expBar.setMax(Exp);
+
 
         doBindService();
 
@@ -160,10 +162,10 @@ public class MainActivity extends AppCompatActivity {
                     //TODO: LEVEL UP
                     if(quest.getProgress()>0 && quest.getProgress()%(Exp)==0) {
                         expBar.setProgress(1);
-                        numSteps = quest.getProgress();
-                        level = numSteps/Exp;
-                        levelText.setText(String.valueOf(level));
                     }
+                    numSteps = quest.getProgress();
+                    level = numSteps/Exp;
+                    levelText.setText(String.valueOf(level));
                     numSteps = quest.getProgress();
 
                 }
@@ -347,19 +349,19 @@ public class MainActivity extends AppCompatActivity {
                         case 0:
                             Home home = new Home();
                             return home;
+//                        case 1:
+//                            Craft craft = new Craft();
+////                            inHome = false;
+////                            Log.d(TAG,"Boolean of Home in Craft:" + inHome);
+//                            return craft;
                         case 1:
-                            Craft craft = new Craft();
-//                            inHome = false;
-//                            Log.d(TAG,"Boolean of Home in Craft:" + inHome);
-                            return craft;
-                        case 2:
                             quest = new Quest();
 //                            inHome = false;
 //                            Log.d(TAG,"Boolean of Home in Quest:" + inHome);
                             inQuest = true;
 
                             return quest;
-                        case 3:
+                        case 2:
                             Stats stats = new Stats();
 //                            inHome = false;
 //                            Log.d(TAG,"Boolean of Home in Stats:" + inHome);
@@ -371,8 +373,8 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public int getCount() {
-                    // Show 4 total pages.
-                    return 4;
+                    // Show 3 total pages.
+                    return 3;
                 }
 
                 @Override
@@ -380,11 +382,11 @@ public class MainActivity extends AppCompatActivity {
                     switch (position) {
                         case 0:
                             return "HOME";
+//                        case 1:
+//                            return "CRAFT";
                         case 1:
-                            return "CRAFT";
-                        case 2:
                             return "QUEST";
-                        case 3:
+                        case 2:
                             return "STATS";
                     }
                     return null;
