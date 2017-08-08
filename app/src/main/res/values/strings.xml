@@ -75,6 +75,7 @@
     <string name="difficulty_choose">Choose a Difficulty Level</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="about">About Game</string>
 
 
     <string-array name="multi_select_list_preference_default_value" />
@@ -92,4 +93,6 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="userid">Player</string>
+    <string name="about_text">Fat Slayer RPG\n\n\nThe main page shows the current level and the user\'s progress towards the next level. The player will see the avatar depiction of their in-game accomplishments.\n\nIn the Settings menu, the Player is allowed to change their display name and choose the difficulty of the game.\n\nTo start playing the game, simply head over to the Quest Tab and tap the "Start" button, and once you are done with your exercise, tap "Stop" button.\n\nFinally, use the Stats Tab to equip items earned from questing to increase questing efficiency and also to customize your character.
+        </string>
 </resources>

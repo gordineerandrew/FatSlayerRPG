@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -50,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView levelText;
     private TextView nameText;
     private TextView fkme;
+    Spinner spinner_helm;
+    Spinner spinner_armor;
+    Spinner spinner_leggings;
+    Spinner spinner_boots;
 
     private int level = 1;
 
@@ -111,7 +116,12 @@ public class MainActivity extends AppCompatActivity {
         nameText = (TextView) findViewById(R.id.userId);
         levelText = (TextView) findViewById(R.id.userLvl);
         fkme = (TextView) findViewById(R.id.count_fat_slain);
+        spinner_helm = (Spinner) findViewById(R.id.equip_helm);
+        spinner_armor = (Spinner) findViewById(R.id.equip_armor);
+        spinner_leggings = (Spinner) findViewById(R.id.equip_leggings);
+        spinner_boots = (Spinner) findViewById(R.id.equip_boots);
 
+        
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -207,7 +217,11 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("name",username);
             startActivityForResult(intent, SETTINGS_REQUEST);
             return true;
+        }else if (id == R.id.about){
+            startActivity(new Intent(this, AboutActivity.class));
+            return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
