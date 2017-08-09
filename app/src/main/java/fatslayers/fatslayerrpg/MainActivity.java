@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity  {
     public boolean inHome = false;
     private Quest quest;
     private Stats stats;
-    private int Exp = 50;
+    private int Exp = 5;
     private int numSteps = 0;
     private Intent music = new Intent();
 
@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity  {
     private int armor_int;
     private int leggings_int;
     private int boots_int;
+
+    private int difficulty_level;
 
     private int boost;
 
@@ -211,15 +213,31 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
+
+
         final Handler handler = new Handler();
         handler.post(new Runnable() {
+
+            int exp_adjusted = 1;
             boolean restored = false;
             ArrayList<String> temp;
             @Override
             public void run() {
 
+                if(boost == 0){
+                    boost = 1;
+                }
+                exp_adjusted = (Exp*difficulty_level)/boost;
 
-                expBar.setMax(Exp);
+                if(exp_adjusted == 0){
+                    exp_adjusted = 10;
+                }
+
+                System.out.println("DIFFICULTY: " + difficulty_level);
+                System.out.println("BOOST: " + boost);
+
+
+                expBar.setMax(exp_adjusted);
                 if(inQuest&& inStats){
                     temp = quest.getItemsList();
                     if(temp.contains("Boots")){
@@ -245,14 +263,14 @@ public class MainActivity extends AppCompatActivity  {
                         quest.setProgress(numSteps);
                     }
 
-                    expBar.setProgress((quest.getProgress()%(Exp)));
+                    expBar.setProgress((quest.getProgress()%(exp_adjusted)));
 
                     //TODO: LEVEL UP
-                    if(quest.getProgress()>0 && quest.getProgress()%(Exp)==0) {
+                    if(quest.getProgress()>0 && quest.getProgress()%(exp_adjusted)==0) {
                         expBar.setProgress(0);
                     }
                     numSteps = quest.getProgress();
-                    level = numSteps/(Exp);
+                    level = numSteps/(exp_adjusted);
                     levelText.setText(String.valueOf(level));
                     numSteps = quest.getProgress();
 
@@ -309,6 +327,7 @@ public class MainActivity extends AppCompatActivity  {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             intent.putExtra("name",username);
+            intent.putExtra("difficulty_level", difficulty_level);
             startActivityForResult(intent, SETTINGS_REQUEST);
             return true;
         }else if (id == R.id.about){
@@ -344,6 +363,7 @@ public class MainActivity extends AppCompatActivity  {
         editor.putInt("boots_int", boots_int);
 
         editor.putInt("boost", boost);
+        editor.putInt("difficulty", difficulty_level);
 
         stopService(music);
         doUnbindService();
@@ -391,6 +411,7 @@ public class MainActivity extends AppCompatActivity  {
         boots_int = sharedPref.getInt("boots_int", 0);
 
         boost = sharedPref.getInt("boost", 1);
+        difficulty_level = sharedPref.getInt("difficulty", 1);
 
 
     }
@@ -401,6 +422,7 @@ public class MainActivity extends AppCompatActivity  {
         mSoundOn=data.getBooleanExtra("soundState", true);
         Log.d(TAG,"sound is on: " + mSoundOn);
         nameText.setText(username);
+        difficulty_level = data.getIntExtra("difficulty_level", 3);
         if (requestCode == SETTINGS_REQUEST) {
 
             SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);

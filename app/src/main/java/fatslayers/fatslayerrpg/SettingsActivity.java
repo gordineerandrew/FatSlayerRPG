@@ -19,6 +19,9 @@ public class SettingsActivity extends AppCompatActivity {
     private static String name;
     private static CheckBoxPreference soundPref;
     private static boolean ItsLookingGood;
+
+    private static int difficulty_level;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,8 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
         name = getIntent().getStringExtra("name");
+        difficulty_level = getIntent().getIntExtra("difficulty_level", 64);
+
     }
 
     @Override
@@ -34,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("name",name);
         intent.putExtra("soundState",ItsLookingGood);
+        intent.putExtra("difficulty_level", difficulty_level);
         setResult(RESULT_OK, intent);
         super.onBackPressed();
     }
@@ -88,12 +94,26 @@ public class SettingsActivity extends AppCompatActivity {
                             SharedPreferences.Editor ed = sharedPrefs.edit();
                             ed.putString("difficulty_level", newValue.toString());
                             ed.apply();
+                            setDifficultyLevel(newValue.toString());
                             return true;
                         }
                     });
+
         }
 
 
+        private void setDifficultyLevel(String value){
+            if(value.equals("Expert")){
+                difficulty_level = 64;
+            }
+            if(value.equals("Harder")){
+                difficulty_level = 16;
+            }
+
+            if(value.equals("Easy")){
+                difficulty_level = 1;
+            }
+        }
 
         private void setUserID() {
             final Preference usernamePref = findPreference("user_id");
@@ -120,6 +140,9 @@ public class SettingsActivity extends AppCompatActivity {
                             getString(R.string.difficulty_expert));
             Preference difficultyLevelPref = findPreference("difficulty_level");
             difficultyLevelPref.setSummary(difficultySummary);
+
+
+
         }
 
         private void updateUsernameSummary() {
