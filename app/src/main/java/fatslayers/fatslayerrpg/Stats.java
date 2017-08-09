@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,17 +35,18 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
     List<String> leggings_list;
     List<String> boots_list;
 
-    private int helm_int;
-    private int armor_int;
-    private int leggings_int;
-    private int boots_int;
-
+    TextView expBonus;
+    TextView expBoost;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.stats_screen, container, false);
+
+        expBonus = (TextView) rootView.findViewById(R.id.exp_bonus);
+        expBoost = (TextView) rootView.findViewById(R.id.exp_boost);
+
         return rootView;
     }
 
@@ -114,25 +116,26 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
 
 
     public int getTotalBoost(){
-
         int total_boost = 0;
 
 
         if(spinner_helm.getSelectedItemId() != 0){
-            total_boost += 10;
+            total_boost += 1;
         }
 
         if(spinner_armor.getSelectedItemId() != 0){
-            total_boost += 10;
+            total_boost += 1;
         }
 
         if(spinner_leggings.getSelectedItemId() != 0){
-            total_boost += 10;
+            total_boost += 1;
         }
 
         if(spinner_boots.getSelectedItemId() != 0){
-            total_boost += 10;
+            total_boost += 1;
         }
+
+        expBoost.setText(String.valueOf(total_boost));
 
         return total_boost;
     }
@@ -143,7 +146,7 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
             helm_list.add("Santa Hat");
         }
         if(armor_bool && !armor_list.contains("Santa Coat")){
-            armor_list.add("Santa Hat");
+            armor_list.add("Santa Coat");
         }
         if(leggings_bool && !leggings_list.contains("Santa Trunks")){
             leggings_list.add("Santa Trunks");

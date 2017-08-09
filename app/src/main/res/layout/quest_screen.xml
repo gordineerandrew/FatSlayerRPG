@@ -98,16 +98,61 @@
     <TextView
         android:id="@+id/loot"
         android:layout_width="wrap_content"
-        android:layout_height="90sp"
-        android:layout_below="@id/Boots"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Boots"
         android:layout_centerInParent="true"
         android:layout_marginTop="70sp"
         android:textAlignment="center"
-        android:gravity="center_horizontal"
         android:text="Gathered Loot"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="25sp" />
+    <TextView
+        android:id="@+id/helmet_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Helmet obtained."
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:layout_below="@+id/loot" />
+    <TextView
+        android:id="@+id/armor_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Armor obtained."
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:layout_below="@+id/helmet_get"
+        android:layout_alignLeft="@+id/helmet_get"
+        android:layout_alignStart="@+id/helmet_get" />
+    <TextView
+        android:id="@+id/leggings_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leggings obtained."
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:layout_below="@+id/armor_get"
+        android:layout_alignLeft="@+id/armor_get"
+        android:layout_alignStart="@+id/armor_get" />
+    <TextView
+        android:id="@+id/boots_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Boots obtained."
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:layout_below="@+id/leggings_get"
+        android:layout_alignLeft="@+id/leggings_get"
+        android:layout_alignStart="@+id/leggings_get" />
 
 
 </RelativeLayout>

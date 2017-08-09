@@ -30,10 +30,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,6 +135,7 @@ public class MainActivity extends AppCompatActivity  {
         nameText = (TextView) findViewById(R.id.userId);
         levelText = (TextView) findViewById(R.id.userLvl);
         fkme = (TextView) findViewById(R.id.count_fat_slain);
+
 //        spinner_helm = (Spinner) findViewById(R.id.equip_helm);
 //        spinner_armor = (Spinner) findViewById(R.id.equip_armor);
 //        spinner_leggings = (Spinner) findViewById(R.id.equip_leggings);

@@ -45,6 +45,10 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
     boolean armor_bool;
     boolean leggings_bool;
     boolean boots_bool;
+    private TextView helmGet;
+    private TextView armorGet;
+    private TextView leggingsGet;
+    private TextView bootsGet;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +56,10 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
 
         RelativeLayout rl = (RelativeLayout) inflater.inflate(R.layout.quest_screen, container, false);
         tv_steps = rl.findViewById(R.id.tv_steps);
+        helmGet = (TextView) rl.findViewById(R.id.helmet_get);
+        armorGet = (TextView) rl.findViewById(R.id.armor_get);
+        leggingsGet = (TextView) rl.findViewById(R.id.leggings_get);
+        bootsGet = (TextView) rl.findViewById(R.id.boots_get);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         simpleStepDetector = new StepDetector();
@@ -210,15 +218,19 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
         ArrayList<String> tempList = new ArrayList<>();
         if(helm_bool&& questSteps > 91){
             tempList.add("Helmet");
+            helmGet.setVisibility(View.VISIBLE);
         }
         if(armor_bool&& questSteps > 81){
             tempList.add("Armor");
+            armorGet.setVisibility(View.VISIBLE);
         }
         if(leggings_bool&& questSteps > 71){
             tempList.add("Leggings");
+            leggingsGet.setVisibility(View.VISIBLE);
         }
         if(boots_bool&& questSteps > 11){
             tempList.add("Boots");
+            bootsGet.setVisibility(View.VISIBLE);
         }
         return tempList;
     }
