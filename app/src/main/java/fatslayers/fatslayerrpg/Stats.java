@@ -54,8 +54,8 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.stats_screen, container, false);
 
-        expBonus = (TextView) rootView.findViewById(R.id.exp_bonus);
-        expBoost = (TextView) rootView.findViewById(R.id.exp_boost);
+        expBonus = rootView.findViewById(R.id.exp_bonus);
+        expBoost = rootView.findViewById(R.id.exp_boost);
 
         return rootView;
     }
@@ -65,10 +65,10 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        spinner_helm = (Spinner) view.findViewById(R.id.equip_helm);
-        spinner_armor = (Spinner) view.findViewById(R.id.equip_armor);
-        spinner_leggings = (Spinner) view.findViewById(R.id.equip_leggings);
-        spinner_boots = (Spinner) view.findViewById(R.id.equip_boots);
+        spinner_helm = view.findViewById(R.id.equip_helm);
+        spinner_armor = view.findViewById(R.id.equip_armor);
+        spinner_leggings = view.findViewById(R.id.equip_leggings);
+        spinner_boots = view.findViewById(R.id.equip_boots);
 
         spinner_helm.setOnItemSelectedListener(this);
         spinner_armor.setOnItemSelectedListener(this);
@@ -102,9 +102,6 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
         spinner_armor.setAdapter(armor_Adapter);
         spinner_leggings.setAdapter(leggings_Adapter);
         spinner_boots.setAdapter(boots_Adapter);
-
-        helm_list.add("fuck this shit");
-
     }
 
     @Override
@@ -162,7 +159,6 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
             leggings_list.add("Santa Trunks");
         }
         if(boots_bool && !boots_list.contains("Santa Flip Flops")){
-            System.out.println("FK IT I DON'T KNOW!!!!!");
             boots_list.add("Santa Flip Flops");
         }
 
