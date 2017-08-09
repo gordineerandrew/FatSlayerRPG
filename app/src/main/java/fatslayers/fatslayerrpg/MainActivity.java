@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity  {
     public boolean inHome = false;
     private Quest quest;
     private Stats stats;
+    private Home home;
     private int Exp = 5;
     private int numSteps = 0;
     private Intent music = new Intent();
@@ -200,6 +201,10 @@ public class MainActivity extends AppCompatActivity  {
         restoreData();
 
         expBar.setMax(Exp);
+        if(inHome){
+            home.showFigures(level,boost);
+        }
+
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -281,9 +286,6 @@ public class MainActivity extends AppCompatActivity  {
                     stats.addItems(helm_bool, armor_bool, leggings_bool, boots_bool);
                     stats.restoreState(helm_int, armor_int, leggings_int, boots_int);
                     restored = true;
-                }else if (inStats){
-                    stats.addItems(helm_bool, armor_bool, leggings_bool, boots_bool);
-                    stats.restoreState(helm_int, armor_int, leggings_int, boots_int);
                 }
 
                 if(inStats){
@@ -292,8 +294,12 @@ public class MainActivity extends AppCompatActivity  {
                     leggings_int = stats.getLeggings();
                     boots_int = stats.getBoots();
                     boost = stats.getTotalBoost();
+                    stats.addItems(helm_bool, armor_bool, leggings_bool, boots_bool);
+                    stats.restoreState(helm_int, armor_int, leggings_int, boots_int);
                 }
-
+                if(inHome){
+                    home.showFigures(level,boost);
+                }
                 fkme.setText(String.valueOf(numSteps));
 
                 handler.postDelayed(this,500);
@@ -511,7 +517,7 @@ public class MainActivity extends AppCompatActivity  {
                 public Fragment getItem(int position) {
                     switch (position) {
                         case 0:
-                            Home home = new Home();
+                            home = new Home();
                             inHome = true;
                             return home;
 //                        case 1:
@@ -519,12 +525,12 @@ public class MainActivity extends AppCompatActivity  {
 ////                            inHome = false;
 ////                            Log.d(TAG,"Boolean of Home in Craft:" + inHome);
 //                            return craft;
-                        case 1:
+                        case 2:
                             quest = new Quest();
                             inQuest = true;
 
                             return quest;
-                        case 2:
+                        case 1:
                             stats = new Stats();
                             inStats = true;
                             return stats;
@@ -546,9 +552,9 @@ public class MainActivity extends AppCompatActivity  {
                             return "HOME";
 //                        case 1:
 //                            return "CRAFT";
-                        case 1:
-                            return "QUEST";
                         case 2:
+                            return "QUEST";
+                        case 1:
                             return "STATS";
                     }
                     return null;

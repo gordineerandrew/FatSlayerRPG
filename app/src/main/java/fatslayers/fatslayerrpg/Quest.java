@@ -56,15 +56,16 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
 
         RelativeLayout rl = (RelativeLayout) inflater.inflate(R.layout.quest_screen, container, false);
         tv_steps = rl.findViewById(R.id.tv_steps);
-        helmGet = (TextView) rl.findViewById(R.id.helmet_get);
-        armorGet = (TextView) rl.findViewById(R.id.armor_get);
-        leggingsGet = (TextView) rl.findViewById(R.id.leggings_get);
-        bootsGet = (TextView) rl.findViewById(R.id.boots_get);
+        helmGet = rl.findViewById(R.id.helmet_get);
+        armorGet = rl.findViewById(R.id.armor_get);
+        leggingsGet = rl.findViewById(R.id.leggings_get);
+        bootsGet = rl.findViewById(R.id.boots_get);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         simpleStepDetector = new StepDetector();
         simpleStepDetector.registerListener(this);
 
+        helmGet.setVisibility(View.VISIBLE);
 
 
 //Tvsteps is initialised here
@@ -77,13 +78,9 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if(helmetCheck.isChecked()){
-                    //System.out.println("Checked");
-                    helm_bool = true;
-                }else{
-                    //System.out.println("Un-Checked");
-                    helm_bool = false;
-                }
+                //System.out.println("Checked");
+//System.out.println("Un-Checked");
+                helm_bool = helmetCheck.isChecked();
             }
         });
         final CheckBox armorCheck = rl.findViewById(R.id.Armor);
@@ -93,13 +90,9 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if(armorCheck.isChecked()){
-                    //System.out.println("Checked");
-                    armor_bool = true;
-                }else{
-                    //System.out.println("Un-Checked");
-                    armor_bool = false;
-                }
+                //System.out.println("Checked");
+//System.out.println("Un-Checked");
+                armor_bool = armorCheck.isChecked();
             }
         });
         final CheckBox leggingsCheck = rl.findViewById(R.id.Leggings);
@@ -109,13 +102,9 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if(leggingsCheck.isChecked()){
-                    //System.out.println("Checked");
-                    leggings_bool = true;
-                }else{
-                    //System.out.println("Un-Checked");
-                    leggings_bool = false;
-                }
+                //System.out.println("Checked");
+//System.out.println("Un-Checked");
+                leggings_bool = leggingsCheck.isChecked();
             }
         });
         final CheckBox bootsCheck = rl.findViewById(R.id.Boots);
@@ -125,13 +114,9 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if(bootsCheck.isChecked()){
-                    //System.out.println("Checked");
-                    boots_bool = true;
-                }else{
-                    //System.out.println("Un-Checked");
-                    boots_bool = false;
-                }
+                //System.out.println("Checked");
+//System.out.println("Un-Checked");
+                boots_bool = bootsCheck.isChecked();
             }
         });
 
