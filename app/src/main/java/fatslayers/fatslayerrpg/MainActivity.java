@@ -281,14 +281,17 @@ public class MainActivity extends AppCompatActivity  {
                     stats.addItems(helm_bool, armor_bool, leggings_bool, boots_bool);
                     stats.restoreState(helm_int, armor_int, leggings_int, boots_int);
                     restored = true;
+                }else if (inStats){
+                    stats.addItems(helm_bool, armor_bool, leggings_bool, boots_bool);
+                    stats.restoreState(helm_int, armor_int, leggings_int, boots_int);
                 }
 
                 if(inStats){
-                    boost = stats.getTotalBoost();
                     helm_int = stats.getHelm();
                     armor_int = stats.getArmor();
                     leggings_int = stats.getLeggings();
                     boots_int = stats.getBoots();
+                    boost = stats.getTotalBoost();
                 }
 
                 fkme.setText(String.valueOf(numSteps));

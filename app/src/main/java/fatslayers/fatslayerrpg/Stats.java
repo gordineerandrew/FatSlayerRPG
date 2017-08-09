@@ -38,6 +38,16 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
     TextView expBonus;
     TextView expBoost;
 
+    boolean helm_boolean;
+    boolean armor_boolean;
+    boolean leggings_boolean;
+    boolean boots_boolean;
+
+    private int helm_int;
+    private int armor_int;
+    private int leggings_int;
+    private int boots_int;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -163,11 +173,6 @@ public class Stats extends Fragment implements AdapterView.OnItemSelectedListene
         spinner_armor.setSelection(armor);
         spinner_leggings.setSelection(leggings);
         spinner_boots.setSelection(boots);
-
-//        helm_int = helm;
-//        armor_int = armor;
-//        leggings_int = leggings;
-//        boots_int = boots;
 
     }
 
