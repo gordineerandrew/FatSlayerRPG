@@ -65,7 +65,6 @@ public class Quest extends Fragment implements StepListener, SensorEventListener
         simpleStepDetector = new StepDetector();
         simpleStepDetector.registerListener(this);
 
-        helmGet.setVisibility(View.VISIBLE);
 
 
 //Tvsteps is initialised here

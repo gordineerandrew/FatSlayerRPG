@@ -32,7 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/appbar_padding_top"
-        android:backgroundTint="@color/gray"
         android:theme="@style/AppTheme.AppBarOverlay">
 
 
@@ -42,7 +41,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            android:backgroundTint="@color/gray"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
         </android.support.v7.widget.Toolbar>
@@ -138,7 +136,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:tabBackground="@color/gray"
+        app:tabBackground="@android:color/white"
+        app:tabSelectedTextColor="@color/colorAccent"
+
         />
 
 
